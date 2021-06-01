@@ -19,3 +19,12 @@ function markerCol(magnitude) {
         return "#8b0000";
     };
 }
+
+d3.json(url, function(data) {
+    //console.log(data)
+    initFeatures(data.features);
+});
+
+function initFeatures(geoData) {
+    var earthquakes = L.geoJSON(geoData)
+}
