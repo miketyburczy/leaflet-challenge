@@ -30,7 +30,13 @@ function markerCol(magnitude) {
 function initFeatures(geoData) {
     var earthquakes = L.geoJSON(geoData, {
         onEachFeature: function (feature, layer) {
-            layer.bindPopup("")
+            layer.bindPopup("<h4>" + feature.properties.place + "</h4><hr><p>" +new DataCue(feature.properties.time) + "</p>" + "<p> Magnitude: " + feature.properties.magnitude + "</p>")},
+            pointToLayer: function (feature, latlng) {
+                return new L.circle(latlng, 
+                    {radius: markerSize(feature.properties.magnitude),
+                         fillColor: markerCol(feature.properties.magnitude),
+                          fillOpacity: 1, stroke: false,})
+            }
         }
-    })
+    });
 }
