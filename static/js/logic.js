@@ -35,8 +35,29 @@ function initFeatures(geoData) {
                 return new L.circle(latlng, 
                     {radius: markerSize(feature.properties.magnitude),
                          fillColor: markerCol(feature.properties.magnitude),
-                          fillOpacity: 1, stroke: false,})
+                          fillOpacity: 1,
+                           stroke: false,})
             }
-        }
     });
+    createMap(earthquakes);
+}
+
+function createMap (earthquakes) {
+    var sateliteMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+        attribution: ""Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+        maxZoom: 15, 
+        id: "mapbox.satellite",
+        accessToken: API_KEY
+    });
+    var darkMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+        attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+        maxZoom: 15,
+        id: "mapbox.satellite",
+        accessToken: API_KEY
+    });
+    var baseMap = {
+        "Satelite Map": sateliteMap,
+        "Dark Map": darkMap
+    };
+
 }
